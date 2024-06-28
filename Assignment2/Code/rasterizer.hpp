@@ -4,8 +4,10 @@
 
 #pragma once
 
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Dense>
 #include <algorithm>
+#include <map>
+#include <vector>
 #include "global.hpp"
 #include "Triangle.hpp"
 using namespace Eigen;

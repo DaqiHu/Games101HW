@@ -396,6 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.idea/
 
 # VS 2022 CMake output
 out/
+vcpkg_installed/
+build/

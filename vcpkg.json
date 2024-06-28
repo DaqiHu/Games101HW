@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "eigen3",
+    "fmt",
+    "opencv2",
+    "opengl",
+    "freetype"
+  ]
+}

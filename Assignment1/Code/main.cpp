@@ -1,8 +1,10 @@
 #include "Triangle.hpp"
 #include "rasterizer.hpp"
-#include <eigen3/Eigen/Eigen>
+#include <Eigen/Dense>
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <vector>
+#include <string>
 
 constexpr double MY_PI = 3.1415926;
 

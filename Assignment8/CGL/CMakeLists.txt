@@ -1,9 +1,9 @@
 # Original file Copyright CMU462 Fall 2015:
 # Kayvon Fatahalian, Keenan Crane,
 # Sky Gao, Bryce Summers, Michael Choquette.
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 project(CGL)
-
+set(OpenGL_DIRS "${VCPKG_INSTALLED_DIR}/x64-windows/share/")
 #-------------------------------------------------------------------------------
 # Build options
 #-------------------------------------------------------------------------------
