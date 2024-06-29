@@ -5,8 +5,8 @@
 #pragma once
 
 #include <Eigen/Dense>
-#include <algorithm>
 #include <map>
+#include <vector>
 #include "Triangle.hpp"
 
 using namespace Eigen;

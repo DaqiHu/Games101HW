@@ -2,9 +2,7 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <string>
-#include <thread>
 #include <vector>
-#include "Triangle.hpp"
 #include "rasterizer.hpp"
 
 
