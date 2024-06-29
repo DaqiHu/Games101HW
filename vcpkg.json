@@ -2,8 +2,8 @@
   "dependencies": [
     "eigen3",
     "fmt",
+    "freetype",
     "opencv2",
-    "opengl",
-    "freetype"
+    "opengl"
   ]
 }

@@ -402,3 +402,10 @@ FodyWeavers.xsd
 out/
 vcpkg_installed/
 build/
+
+# xmake cache
+.xmake/
+build/
+
+# MacOS Cache
+.DS_Store
