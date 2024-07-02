@@ -46,9 +46,8 @@ Eigen::Matrix4f get_model_matrix(float rot_z)
 
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float zNear, float zFar)
 {
-    // Students will implement this function
-
     float l, r, b, t, n, f;
+
     n = zNear;
     f = zFar;
 
@@ -57,9 +56,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     r = aspect_ratio * t;
     l = -r;
 
-    Eigen::Matrix4f PerspToOrtho;
-    Eigen::Matrix4f OrthoTranslation;
-    Eigen::Matrix4f OrthoScaling;
+    Eigen::Matrix4f PerspToOrtho, OrthoTranslation, OrthoScaling;
 
     // clang-format off
     PerspToOrtho <<
