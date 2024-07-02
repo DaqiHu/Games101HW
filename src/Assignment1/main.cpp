@@ -1,8 +1,10 @@
 #include <Eigen/Dense>
+#include <cmath>
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <string>
 #include <vector>
+#include "Eigen/src/Core/Matrix.h"
 #include "rasterizer.hpp"
 
 
@@ -15,10 +17,10 @@ Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
     Eigen::Matrix4f translate;
 
     // clang-format off
-    translate << 
+    translate <<
         1, 0, 0, -eye_pos[0],
-        0, 1, 0, -eye_pos[1], 
-        0, 0, 1, -eye_pos[2], 
+        0, 1, 0, -eye_pos[1],
+        0, 0, 1, -eye_pos[2],
         0, 0, 0, 1;
     // clang-format on
 
@@ -27,13 +29,17 @@ Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
     return view;
 }
 
-Eigen::Matrix4f get_model_matrix(float rotation_angle)
+Eigen::Matrix4f get_model_matrix(float rot_z)
 {
-    Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
+    Eigen::Matrix4f model;
 
-    // TODO: Implement this function
-    // Create the model matrix for rotating the triangle around the Z axis.
-    // Then return it.
+    // clang-format off
+    model <<
+        cos(rot_z), -sin(rot_z), 0, 0,
+        sin(rot_z), cos(rot_z), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1;
+    // clang-format on
 
     return model;
 }
@@ -42,13 +48,40 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
 {
     // Students will implement this function
 
-    Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
+    float l, r, b, t, n, f;
+    n = zNear;
+    f = zFar;
 
-    // TODO: Implement this function
-    // Create the projection matrix for the given parameters.
-    // Then return it.
+    t = tan(eye_fov / 2) * abs(zNear);
+    b = -t;
+    r = aspect_ratio * t;
+    l = -r;
 
-    return projection;
+    Eigen::Matrix4f PerspToOrtho;
+    Eigen::Matrix4f OrthoTranslation;
+    Eigen::Matrix4f OrthoScaling;
+
+    // clang-format off
+    PerspToOrtho <<
+        n, 0, 0, 0,
+        0, n, 0, 0,
+        0, 0, n + f, -f * n,
+        0, 0, 1, 0;
+
+    OrthoTranslation <<
+        1, 0, 0, -(r + l) / 2,
+        0, 1, 0, -(t + b) / 2,
+        0, 0, 1, -(n + f) / 2,
+        0, 0, 0, 1;
+
+    OrthoScaling <<
+        2 / (r - l), 0, 0, 0,
+        0, 2 / (t - b), 0, 0,
+        0, 0, 2 / (n - f), 0,
+        0, 0, 0, 1;
+    // clang-format on
+
+    return OrthoScaling * OrthoTranslation * PerspToOrtho;
 }
 
 auto get_image(float angle, const Eigen::Vector3f& eye_pos, const rst::pos_buf_id& pos_id, const rst::ind_buf_id& ind_id)
