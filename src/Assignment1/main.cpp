@@ -8,7 +8,12 @@
 #include "rasterizer.hpp"
 
 
-constexpr double MY_PI = 3.1415926;
+constexpr double PI   = 3.1415926'5358979'32384626'43383'2795029;
+constexpr float PI_f  = PI;
+constexpr double PI_d = PI;
+
+constexpr double deg2rad(double deg) { return deg / 180.0 * PI_d; }
+constexpr float deg2rad(float deg) { return deg / 180.0f * PI_f; }
 
 Eigen::Matrix4f get_view_matrix(Eigen::Vector3f eye_pos)
 {
@@ -35,8 +40,8 @@ Eigen::Matrix4f get_model_matrix(float rot_z)
 
     // clang-format off
     model <<
-        cos(rot_z), -sin(rot_z), 0, 0,
-        sin(rot_z), cos(rot_z), 0, 0,
+        cos(deg2rad(rot_z)), -sin(deg2rad(rot_z)), 0, 0,
+        sin(deg2rad(rot_z)), cos(deg2rad(rot_z)), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1;
     // clang-format on
@@ -51,7 +56,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     n = zNear;
     f = zFar;
 
-    t = tan(eye_fov / 2) * abs(zNear);
+    t = tan(deg2rad(eye_fov / 2)) * abs(zNear);
     b = -t;
     r = aspect_ratio * t;
     l = -r;

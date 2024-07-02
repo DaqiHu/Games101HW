@@ -1,6 +1,13 @@
 add_rules("mode.debug", "mode.release")
 add_requires("fmt", "eigen", "opencv")
 
+
+target("test")
+    set_languages("c++latest")
+    set_kind("binary")
+    add_files("tests/*.cpp")
+    set_policy("build.c++.modules", true)
+
 target("Assignment1")
     set_kind("binary")
     add_files("src/Assignment1/*.cpp")
